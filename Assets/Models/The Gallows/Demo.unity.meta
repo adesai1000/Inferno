@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f03f336ca5df5f6489dc04981e0a30df
+timeCreated: 1577592831
+licenseType: Store
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 160148
+  packageName: The Gallows
+  packageVersion: 1.0
+  assetPath: Assets/The Gallows/Demo.unity
+  uploadId: 345094
