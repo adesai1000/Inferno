@@ -35,8 +35,7 @@ public class NPCSoundController : MonoBehaviour
     {
         if (oneShotSource && oneShotClip)
         {
-            oneShotSource.PlayOneShot(oneShotClip);
-            Debug.Log("Gunshot played!"); // check Console to confirm trigger
+            // check Console to confirm trigger
         }
         else
         {
