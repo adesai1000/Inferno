@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 30ee65e69f8609444aed8dfc4cfca0cd
+timeCreated: 1577598648
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 160148
+  packageName: The Gallows
+  packageVersion: 1.0
+  assetPath: Assets/The Gallows/Prefabs/The Gallows Final.prefab
+  uploadId: 345094
