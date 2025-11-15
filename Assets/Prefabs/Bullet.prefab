@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7967994778166582888}
   - component: {fileID: 549737063317809855}
   - component: {fileID: 341849895069174346}
-  - component: {fileID: 1568098629537097776}
+  - component: {fileID: -4347044182341821843}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -107,7 +107,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -140,7 +140,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &1568098629537097776
+--- !u!114 &-4347044182341821843
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,4 +153,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bullet
   life: 3
-  damage: 10
+  damage: 20

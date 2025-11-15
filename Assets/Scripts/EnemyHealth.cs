@@ -2,15 +2,33 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [Header("Health Settings")]
     public float maxHealth = 100f;
-    float current;
+    private float currentHealth;
 
-    void Awake() => current = maxHealth;
+    // Read-only access for UI
+    public float CurrentHealth => currentHealth;
+    public float NormalizedHealth => maxHealth > 0f ? currentHealth / maxHealth : 0f;
 
-    public void TakeDamage(float dmg)
+    void Start()
     {
-        current -= dmg;
-        Debug.Log($"{name} took {dmg} (HP={current})");
-        if (current <= 0f) gameObject.SetActive(false); // simple “die”
+        currentHealth = maxHealth;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        Debug.Log($"{gameObject.name} took {damage} damage. HP left: {currentHealth}");
+
+        if (currentHealth <= 0f)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log($"{gameObject.name} died!");
+        Destroy(gameObject);
     }
 }

@@ -3,16 +3,23 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float life = 3f;
-    public float damage = 10f;
+    public float damage = 20f;  
 
-    void Awake() => Destroy(gameObject, life);
-
-    void OnTriggerEnter(Collider other)
+    void Awake()
     {
-        // Optional damage:
-        var eh = other.GetComponent<EnemyHealth>() ?? other.GetComponentInParent<EnemyHealth>();
-        if (eh) eh.TakeDamage(damage);
+        Destroy(gameObject, life);
+    }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        
+        EnemyHealth enemy = collision.gameObject.GetComponent<EnemyHealth>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage);
+        }
+
+        
         Destroy(gameObject);
     }
 }
