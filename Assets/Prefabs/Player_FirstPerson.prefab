@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 8188697013275403171}
   - component: {fileID: 1817507089299170757}
   - component: {fileID: 2584911688683213983}
+  - component: {fileID: 831424991975400488}
   m_Layer: 0
   m_Name: Player_FirstPerson
   m_TagString: Untagged
@@ -482,3 +483,28 @@ MonoBehaviour:
   mouseSensitivity: 1
   pitchMin: -85
   pitchMax: 85
+--- !u!143 &831424991975400488
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530213738650894779}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5000001
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
