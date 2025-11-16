@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ba41f1637356eba48891721f9a089cd1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203352
+  packageName: Devil Woman
+  packageVersion: 1.0
+  assetPath: Assets/DevilWoman/Mesh/Materials/M_DevilClothMtl.mat
+  uploadId: 453698

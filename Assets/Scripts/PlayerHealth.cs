@@ -8,10 +8,10 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
 
     [Header("Invulnerability")]
-    public float iFrameDuration = 0.2f;   // brief grace after a hit (seconds)
+    public float iFrameDuration = 0.2f;   
     private float _iFrameTimer = 0f;
 
-    public event Action<float, float> OnHealthChanged; // (current, max)
+    public event Action<float, float> OnHealthChanged; 
     public event Action OnDeath;
 
     void Awake()
@@ -50,11 +50,11 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        // TODO: disable input / show game over / respawn
+        
         OnDeath?.Invoke();
         Debug.Log("Player died.");
     }
 
-    // Optional: simple API enemies can call
+    
     public void ApplyContactDamage(float amount) => TakeDamage(amount);
 }

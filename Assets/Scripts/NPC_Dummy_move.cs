@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class SimpleMove : MonoBehaviour
 {
     public float speed = 3f;
+    public float sprintSpeed = 6f;
 
     public Camera playerCamera;
     public float mouseSensitivity = 0.1f;
@@ -71,7 +72,11 @@ public class SimpleMove : MonoBehaviour
                 - (Keyboard.current.downArrowKey.isPressed ? 1f : 0f);
         }
 
-        Vector3 move = (transform.right * x + transform.forward * z).normalized * speed;
+        float currentSpeed = speed;
+        if (Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed)
+            currentSpeed = sprintSpeed;
+
+        Vector3 move = (transform.right * x + transform.forward * z).normalized * currentSpeed;
 
         if (controller.isGrounded && verticalVelocity < 0f)
             verticalVelocity = -2f;
