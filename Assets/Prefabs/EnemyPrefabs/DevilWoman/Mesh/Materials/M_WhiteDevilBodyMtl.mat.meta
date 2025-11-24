@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dd21b762e676fe147a795e5652b642a3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203352
+  packageName: Devil Woman
+  packageVersion: 1.0
+  assetPath: Assets/DevilWoman/Mesh/Materials/M_WhiteDevilBodyMtl.mat
+  uploadId: 453698
