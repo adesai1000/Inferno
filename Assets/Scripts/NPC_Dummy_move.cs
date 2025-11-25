@@ -1,26 +1,32 @@
 using UnityEngine;
-using UnityEngine.InputSystem; // New Input System
+using UnityEngine.InputSystem;
 
 public class SimpleMove : MonoBehaviour
 {
-    [Header("Move")]
     public float speed = 3f;
+    public float sprintSpeed = 6f;
 
-    [Header("Look")]
-    public Camera playerCamera;          // assign your Main Camera (child of this object)
-    public float mouseSensitivity = 0.1f; // tweak to taste
+    public Camera playerCamera;
+    public float mouseSensitivity = 0.1f;
     public float pitchMin = -85f;
     public float pitchMax = 85f;
 
-    private float yaw;    // left/right
-    private float pitch;  // up/down
+    float yaw;
+    float pitch;
+    CharacterController controller;
+    float verticalVelocity;
+    float gravity = -9.81f;
+
+    void Awake()
+    {
+        controller = GetComponent<CharacterController>();
+    }
 
     void OnEnable()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // Initialize yaw from current rotation so there’s no snap
         yaw = transform.eulerAngles.y;
         if (playerCamera == null && Camera.main != null)
             playerCamera = Camera.main;
@@ -34,47 +40,56 @@ public class SimpleMove : MonoBehaviour
 
     void Update()
     {
-        // --- LOOK (mouse + optional gamepad) ---
         Vector2 look = Vector2.zero;
 
         if (Mouse.current != null)
-            look += Mouse.current.delta.ReadValue();           // pixels this frame
+            look += Mouse.current.delta.ReadValue();
 
         if (Gamepad.current != null)
-            look += Gamepad.current.rightStick.ReadValue() * 10f; // optional stick look
+            look += Gamepad.current.rightStick.ReadValue() * 10f;
 
-        yaw   += look.x * mouseSensitivity;
+        yaw += look.x * mouseSensitivity;
         pitch -= look.y * mouseSensitivity;
-        pitch  = Mathf.Clamp(pitch, pitchMin, pitchMax);
+        pitch = Mathf.Clamp(pitch, pitchMin, pitchMax);
 
-        // Apply rotations: yaw on body, pitch on camera
         transform.rotation = Quaternion.Euler(0f, yaw, 0f);
         if (playerCamera != null)
             playerCamera.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
 
-        // --- MOVE (WASD + arrows with New Input System) ---
-        float x = 0f, z = 0f;
+        float x = 0f;
+        float z = 0f;
+
         if (Keyboard.current != null)
         {
             x = (Keyboard.current.dKey.isPressed ? 1f : 0f)
-              - (Keyboard.current.aKey.isPressed ? 1f : 0f);
+                - (Keyboard.current.aKey.isPressed ? 1f : 0f);
             z = (Keyboard.current.wKey.isPressed ? 1f : 0f)
-              - (Keyboard.current.sKey.isPressed ? 1f : 0f);
+                - (Keyboard.current.sKey.isPressed ? 1f : 0f);
 
             x += (Keyboard.current.rightArrowKey.isPressed ? 1f : 0f)
-               - (Keyboard.current.leftArrowKey.isPressed ? 1f : 0f);
+                - (Keyboard.current.leftArrowKey.isPressed ? 1f : 0f);
             z += (Keyboard.current.upArrowKey.isPressed ? 1f : 0f)
-               - (Keyboard.current.downArrowKey.isPressed ? 1f : 0f);
+                - (Keyboard.current.downArrowKey.isPressed ? 1f : 0f);
         }
 
-        Vector3 dir = (transform.right * x + transform.forward * z).normalized;
-        transform.Translate(dir * speed * Time.deltaTime, Space.World);
+        float currentSpeed = speed;
+        if (Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed)
+            currentSpeed = sprintSpeed;
 
-        // Quick unlock (optional): press Escape to free cursor
+        Vector3 move = (transform.right * x + transform.forward * z).normalized * currentSpeed;
+        Vector3 move = (transform.right * x + transform.forward * z).normalized * speed;
+
+        if (controller.isGrounded && verticalVelocity < 0f)
+            verticalVelocity = -2f;
+
+        verticalVelocity += gravity * Time.deltaTime;
+        move.y = verticalVelocity;
+
+        controller.Move(move * Time.deltaTime);
+
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            Cursor.lockState = (Cursor.lockState == CursorLockMode.Locked)
-                ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.lockState = (Cursor.lockState == CursorLockMode.Locked) ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = Cursor.lockState != CursorLockMode.Locked;
         }
     }
