@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 10854baf7fa314a1082b9dae478e2d71, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -26156,6 +26156,7 @@ GameObject:
   - component: {fileID: 2010096342}
   - component: {fileID: 2010096344}
   - component: {fileID: 2010096345}
+  - component: {fileID: 2010096346}
   m_Layer: 0
   m_Name: Player_FirstPerson
   m_TagString: Untagged
@@ -26251,7 +26252,7 @@ Transform:
   m_GameObject: {fileID: 2010096337}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9999872, z: -0, w: -0.0050674216}
-  m_LocalPosition: {x: 0.75, y: 3.02, z: 8.31}
+  m_LocalPosition: {x: 0.75, y: 4.41, z: 8.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26481,10 +26482,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimpleMove
   speed: 4
+  sprintSpeed: 6
   playerCamera: {fileID: 0}
   mouseSensitivity: 1
   pitchMin: -85
   pitchMax: 85
+--- !u!143 &2010096346
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010096337}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5000001
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2025533405
 PrefabInstance:
   m_ObjectHideFlags: 0
