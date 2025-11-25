@@ -626,6 +626,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6760613976643501948, guid: 7f774a6bdcb19b84b84cc8f47fad153e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 795715064}
+    - targetCorrespondingSourceObject: {fileID: 6760613976643501948, guid: 7f774a6bdcb19b84b84cc8f47fad153e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 795715068}
+    - targetCorrespondingSourceObject: {fileID: 6760613976643501948, guid: 7f774a6bdcb19b84b84cc8f47fad153e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 795715069}
   m_SourcePrefab: {fileID: 100100000, guid: 7f774a6bdcb19b84b84cc8f47fad153e, type: 3}
 --- !u!1001 &137091121
 PrefabInstance:
@@ -3781,6 +3787,43 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &795715068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795715063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26df48f90a665446db0c5ad3d1aef82a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyContactDamage
+  contactDamage: 20
+  damageCooldown: 0.5
+--- !u!136 &795715069
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795715063}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.6902802
+  m_Direction: 1
+  m_Center: {x: -0, y: 0.8451401, z: -0}
 --- !u!1001 &799113519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8500,7 +8543,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -47742061411176178, guid: 78b6bdaa10a044ab8802d40aeec40c88, type: 3}
       propertyPath: maxHealth
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1332961080951399542, guid: 78b6bdaa10a044ab8802d40aeec40c88, type: 3}
       propertyPath: CinemachineCameraTarget
