@@ -17,7 +17,7 @@ public class EnemyContactDamage : MonoBehaviour
         if (timer > 0f) return;
         if (!other.CompareTag("Player")) return;
 
-        var health = other.GetComponent<PlayerHealth>();
+        PlayerHealth health = other.GetComponent<PlayerHealth>();
         if (health == null) return;
 
         health.ApplyContactDamage(contactDamage);
