@@ -10,8 +10,8 @@ public class MainMenuUI : MonoBehaviour
     [Header("Main Menu Root (everything to hide)")]
     [SerializeField] private GameObject mainMenuRoot;   // Parent that contains TitleText + Buttons + Background, etc.
 
-    [Header("Scenes")]
-    [SerializeField] private string gameSceneName = "Game"; // Exact scene name in Build Settings
+    [Header("Fallback (only used if LevelManager is missing)")]
+    [SerializeField] private string fallbackGameSceneName = "Level1_Limbo"; // Exact scene name in Build Profiles
 
     private void Awake()
     {
@@ -19,24 +19,39 @@ public class MainMenuUI : MonoBehaviour
         if (optionsPanel != null) optionsPanel.SetActive(false);
         ShowMainMenu(true);
 
-        // (Optional) Make sure Options is on top if both are active in editor
+        // Ensure Options is on top if both are active in editor
         if (optionsPanel != null)
             optionsPanel.transform.SetAsLastSibling();
+
+        if (mainMenuRoot == null)
+            Debug.LogWarning("[MainMenuUI] mainMenuRoot not assigned. Assign a parent that contains Title/Buttons/Background.");
     }
 
     // --- Buttons ---
 
-    // Play
+    // Play → start at the first configured level (index 0)
     public void OnPlay()
     {
-        if (string.IsNullOrWhiteSpace(gameSceneName))
+        // Prefer LevelManager flow (with loading screen & titles)
+        if (LevelManager.I != null)
         {
-            Debug.LogError("[MainMenuUI] gameSceneName is empty. Set it in the Inspector.");
+            // Hide menu UI before switching
+            ShowMainMenu(false);
+            if (optionsPanel) optionsPanel.SetActive(false);
+
+            LevelManager.I.StartGameAt(0); // first level in LevelRegistry
             return;
         }
 
-        // Make sure the scene is added to Build Settings
-        SceneManager.LoadScene(gameSceneName);
+        // Fallback: direct scene load (no loading UI)
+        if (string.IsNullOrWhiteSpace(fallbackGameSceneName))
+        {
+            Debug.LogError("[MainMenuUI] No LevelManager found and fallbackGameSceneName is empty. Set one in the Inspector.");
+            return;
+        }
+
+        Debug.LogWarning("[MainMenuUI] LevelManager not found. Using fallback direct scene load.");
+        SceneManager.LoadScene(fallbackGameSceneName);
     }
 
     // Options
@@ -78,6 +93,5 @@ public class MainMenuUI : MonoBehaviour
     private void ShowMainMenu(bool show)
     {
         if (mainMenuRoot != null) mainMenuRoot.SetActive(show);
-        else Debug.LogWarning("[MainMenuUI] mainMenuRoot not assigned. Assign a parent that contains Title/Buttons/Background.");
     }
 }
