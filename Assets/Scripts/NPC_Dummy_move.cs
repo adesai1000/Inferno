@@ -77,7 +77,7 @@ public class SimpleMove : MonoBehaviour
             currentSpeed = sprintSpeed;
 
         Vector3 move = (transform.right * x + transform.forward * z).normalized * currentSpeed;
-        Vector3 move = (transform.right * x + transform.forward * z).normalized * speed;
+        // Vector3 move = (transform.right * x + transform.forward * z).normalized * speed;
 
         if (controller.isGrounded && verticalVelocity < 0f)
             verticalVelocity = -2f;
