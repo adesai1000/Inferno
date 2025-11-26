@@ -31027,11 +31027,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 81621965552385766, guid: 8d7d194d8eb36ae4ca5e07c3b70744b4, type: 3}
       propertyPath: m_fontSize
-      value: 170
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 81621965552385766, guid: 8d7d194d8eb36ae4ca5e07c3b70744b4, type: 3}
       propertyPath: m_fontSizeBase
-      value: 170
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 298205786250400180, guid: 8d7d194d8eb36ae4ca5e07c3b70744b4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
