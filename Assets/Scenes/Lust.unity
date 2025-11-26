@@ -5727,8 +5727,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d48799dbbc34a778277b09dcca0636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCSoundController
+  footstepClips: []
+  stepInterval: 0.6
+  minSpeed: 0.1
+  agent: {fileID: 0}
   hitClip: {fileID: 8300000, guid: 33e17ea28e7894c3cb23f339b16e7f71, type: 3}
   deathClip: {fileID: 8300000, guid: bd88f3837d41d47f0bbee37014aab88d, type: 3}
+  loopSource: {fileID: 0}
+  idleLoop: {fileID: 0}
 --- !u!82 &759761290
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9955,8 +9961,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d48799dbbc34a778277b09dcca0636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCSoundController
+  footstepClips: []
+  stepInterval: 0.6
+  minSpeed: 0.1
+  agent: {fileID: 0}
   hitClip: {fileID: 8300000, guid: 33e17ea28e7894c3cb23f339b16e7f71, type: 3}
   deathClip: {fileID: 8300000, guid: bd88f3837d41d47f0bbee37014aab88d, type: 3}
+  loopSource: {fileID: 0}
+  idleLoop: {fileID: 0}
 --- !u!1 &1326766394
 GameObject:
   m_ObjectHideFlags: 0
@@ -11440,8 +11452,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d48799dbbc34a778277b09dcca0636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCSoundController
+  footstepClips: []
+  stepInterval: 0.6
+  minSpeed: 0.1
+  agent: {fileID: 0}
   hitClip: {fileID: 8300000, guid: 33e17ea28e7894c3cb23f339b16e7f71, type: 3}
   deathClip: {fileID: 8300000, guid: bd88f3837d41d47f0bbee37014aab88d, type: 3}
+  loopSource: {fileID: 0}
+  idleLoop: {fileID: 0}
 --- !u!1 &1427419983 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 118458008299423567, guid: 1211a8a70ccbf8941b4f049e54df814a, type: 3}
@@ -13445,8 +13463,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d48799dbbc34a778277b09dcca0636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCSoundController
+  footstepClips: []
+  stepInterval: 0.6
+  minSpeed: 0.1
+  agent: {fileID: 0}
   hitClip: {fileID: 8300000, guid: 33e17ea28e7894c3cb23f339b16e7f71, type: 3}
   deathClip: {fileID: 8300000, guid: bd88f3837d41d47f0bbee37014aab88d, type: 3}
+  loopSource: {fileID: 0}
+  idleLoop: {fileID: 0}
 --- !u!4 &1624499270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5452181475300748524, guid: 78b6bdaa10a044ab8802d40aeec40c88, type: 3}
@@ -16849,8 +16873,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d48799dbbc34a778277b09dcca0636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCSoundController
+  footstepClips: []
+  stepInterval: 0.6
+  minSpeed: 0.1
+  agent: {fileID: 0}
   hitClip: {fileID: 8300000, guid: 33e17ea28e7894c3cb23f339b16e7f71, type: 3}
   deathClip: {fileID: 8300000, guid: bd88f3837d41d47f0bbee37014aab88d, type: 3}
+  loopSource: {fileID: 0}
+  idleLoop: {fileID: 0}
 --- !u!82 &2078398815
 AudioSource:
   m_ObjectHideFlags: 0
