@@ -1,58 +1,55 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class PauseManager : MonoBehaviour
 {
-    [Header("Assign Pause Panel Here")]
+    [Header("Assign the Pause Panel (Parent of Resume/Restart/Quit)")]
     public GameObject pausePanel;
 
     private bool isPaused = false;
 
-    // Stores all player movement / camera scripts
-    private MonoBehaviour[] controlScripts;
+    // Scripts we disable during pause
+    private MonoBehaviour[] gameplayScripts;
+
+    // NavMesh agents (enemies) to freeze
+    private NavMeshAgent[] navAgents;
 
     void Start()
     {
-        // Auto-find every script in the scene (new Unity API)
-        controlScripts = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
-
-        if (pausePanel != null)
+        if (pausePanel == null)
         {
-            pausePanel.SetActive(false);   // Hide panel on start
-        }
-        else
-        {
-            Debug.LogError("❌ PauseManager ERROR: pausePanel is NOT assigned in the Inspector!");
+            Debug.LogError("❌ PauseManager ERROR: pausePanel is not assigned!");
+            return;
         }
 
-        // Hide & lock cursor at start
+        pausePanel.SetActive(false);
+
+        // Auto-find all scripts in scene
+        gameplayScripts = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+
+        // Auto-find all navmesh agents (enemy movement)
+        navAgents = FindObjectsByType<NavMeshAgent>(FindObjectsSortMode.None);
+
+        // Start with hidden cursor
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        // ESC toggles pause
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!isPaused)
-                PauseGame();
-            else
-                ResumeGame();
+            if (!isPaused) PauseGame();
+            else ResumeGame();
         }
     }
 
-    // -------------------------
-    // 🚀 PAUSE THE GAME
-    // -------------------------
+    // -------------------------------
+    // PAUSE GAME
+    // -------------------------------
     public void PauseGame()
     {
-        if (pausePanel == null)
-        {
-            Debug.LogError("❌ PauseManager: pausePanel not assigned!");
-            return;
-        }
-
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -60,20 +57,15 @@ public class PauseManager : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        DisableControls();
+        DisableGameplayScripts();
+        FreezeNavAgents();
     }
 
-    // -------------------------
-    // ▶ RESUME GAME
-    // -------------------------
+    // -------------------------------
+    // RESUME GAME
+    // -------------------------------
     public void ResumeGame()
     {
-        if (pausePanel == null)
-        {
-            Debug.LogError("❌ PauseManager: pausePanel not assigned!");
-            return;
-        }
-
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
@@ -81,65 +73,115 @@ public class PauseManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        EnableControls();
+        EnableGameplayScripts();
+        UnfreezeNavAgents();
     }
 
-    // -------------------------
-    // 🔄 RESTART LEVEL
-    // -------------------------
+    // -------------------------------
+    // RESTART LEVEL
+    // -------------------------------
     public void RestartLevel()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    // -------------------------
-    // 🚪 QUIT TO MAIN MENU
-    // -------------------------
+    // -------------------------------
+    // QUIT TO MAIN MENU
+    // -------------------------------
     public void QuitGame()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 
-    // -------------------------
-    // ❌ DISABLE MOVEMENT/LOOK SCRIPTS
-    // -------------------------
-    void DisableControls()
+    // -------------------------------
+    // DISABLE ALL NON-UI SCRIPTS
+    // -------------------------------
+    private void DisableGameplayScripts()
     {
-        foreach (MonoBehaviour script in controlScripts)
+        foreach (var script in gameplayScripts)
         {
             if (script == null) continue;
 
-            string n = script.GetType().Name;
+            // Skip UI scripts
+            if (script is UnityEngine.UI.Graphic ||
+                script is UnityEngine.EventSystems.UIBehaviour)
+                continue;
 
-            // Detect common movement/camera scripts intelligently
-            if (n.Contains("Look") || n.Contains("Camera")
-             || n.Contains("Move") || n.Contains("Player")
-             || n.Contains("Controller"))
+            string name = script.GetType().Name;
+
+            // Disable common gameplay classes
+            if (name.Contains("Move") ||
+                name.Contains("Look") ||
+                name.Contains("Shoot") ||
+                name.Contains("Attack") ||
+                name.Contains("Gun") ||
+                name.Contains("Weapon") ||
+                name.Contains("Player") ||
+                name.Contains("Enemy") ||
+                name.Contains("AI") ||
+                name.Contains("Controller") ||
+                name.Contains("Input"))
             {
                 script.enabled = false;
             }
         }
     }
 
-    // -------------------------
-    // ✔ ENABLE MOVEMENT/LOOK SCRIPTS
-    // -------------------------
-    void EnableControls()
+    // -------------------------------
+    // ENABLE GAMEPLAY SCRIPTS
+    // -------------------------------
+    private void EnableGameplayScripts()
     {
-        foreach (MonoBehaviour script in controlScripts)
+        foreach (var script in gameplayScripts)
         {
             if (script == null) continue;
 
-            string n = script.GetType().Name;
+            string name = script.GetType().Name;
 
-            if (n.Contains("Look") || n.Contains("Camera")
-             || n.Contains("Move") || n.Contains("Player")
-             || n.Contains("Controller"))
+            if (name.Contains("Move") ||
+                name.Contains("Look") ||
+                name.Contains("Shoot") ||
+                name.Contains("Attack") ||
+                name.Contains("Gun") ||
+                name.Contains("Weapon") ||
+                name.Contains("Player") ||
+                name.Contains("Enemy") ||
+                name.Contains("AI") ||
+                name.Contains("Controller") ||
+                name.Contains("Input"))
             {
                 script.enabled = true;
             }
+        }
+    }
+
+    // -------------------------------
+    // FREEZE NAVMESH ENEMIES
+    // -------------------------------
+    private void FreezeNavAgents()
+    {
+        foreach (var agent in navAgents)
+        {
+            if (agent == null) continue;
+            agent.updatePosition = false;
+            agent.updateRotation = false;
+            agent.isStopped = true;
+        }
+    }
+
+    // -------------------------------
+    // UNFREEZE NAVMESH ENEMIES
+    // -------------------------------
+    private void UnfreezeNavAgents()
+    {
+        foreach (var agent in navAgents)
+        {
+            if (agent == null) continue;
+            agent.updatePosition = true;
+            agent.updateRotation = true;
+            agent.isStopped = false;
         }
     }
 }

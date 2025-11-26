@@ -15,3 +15,9 @@ MonoBehaviour:
   levels:
   - scene: Limbo
     title: Level 1-Limbo
+  - scene: Lust
+    title: Level 2-Lust
+  - scene: Greed&Gluttony
+    title: Level 3-Greed&Gluttony
+  - scene: Anger&Violence
+    title: Level 4-Anger&Violence
