@@ -1,24 +1,27 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 #if ENABLE_INPUT_SYSTEM
-using UnityEngine.InputSystem; // New Input System
+using UnityEngine.InputSystem;
 #endif
 
 public class NooseInteract : MonoBehaviour
 {
     [Header("Refs")]
-    public Transform player;            // Optional: auto-filled from trigger if left null (tag Player)
-    public UIFader fader;               // Drag the UIFader on your full-screen black Image
-    public GameObject pressEPrompt;     // Optional TMP "Press E" text object
+    public Transform player;
+    public UIFader fader;
+    public GameObject pressEPrompt;
+
+    [Header("Transition UI")]
+    public GameObject transitionCanvas;
+    public TMPro.TextMeshProUGUI transitionText;
+    public string nextLevelName;
 
     [Header("Timing")]
-    [Tooltip("Seconds to fade to black before showing 'Completed' card.")]
     public float fadeTime = 1.2f;
-    [Tooltip("Seconds to hold the 'Level Completed' card before loading screen kicks in.")]
-    public float completedCardSeconds = 1.5f;
+    public float panelShowSeconds = 3f;
 
-    [Header("Disable during fade (optional)")]
-    [Tooltip("Movement / input scripts to disable during the fade so the player can't move.")]
+    [Header("Disable during fade")]
     public MonoBehaviour[] disableWhileFading;
 
     private bool inRange;
@@ -26,7 +29,9 @@ public class NooseInteract : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!player && other.CompareTag("Player")) player = other.transform;
+        if (!player && other.CompareTag("Player"))
+            player = other.transform;
+
         if (other.transform == player)
         {
             inRange = true;
@@ -48,40 +53,59 @@ public class NooseInteract : MonoBehaviour
         if (!inRange || consumed) return;
 
         bool pressed = false;
-        #if ENABLE_INPUT_SYSTEM
-        if (Keyboard.current != null) pressed = Keyboard.current.eKey.wasPressedThisFrame;
-        #else
+
+#if ENABLE_INPUT_SYSTEM
+        if (Keyboard.current != null)
+            pressed = Keyboard.current.eKey.wasPressedThisFrame;
+#else
         pressed = Input.GetKeyDown(KeyCode.E);
-        #endif
+#endif
 
         if (pressed)
         {
-            consumed = true; // prevent double-activation
-            StartCoroutine(FadeAndComplete());
+            consumed = true;
+            StartCoroutine(DoTransition());
         }
     }
 
-    private IEnumerator FadeAndComplete()
+    private IEnumerator DoTransition()
     {
-        // Hide prompt & lock controls
         if (pressEPrompt) pressEPrompt.SetActive(false);
-        foreach (var m in disableWhileFading) if (m) m.enabled = false;
 
-        // Fade to black (covers transition from gameplay)
+        foreach (var m in disableWhileFading)
+            if (m) m.enabled = false;
+
+        // Fade to black
         if (fader) fader.FadeToBlack(fadeTime);
         yield return new WaitForSecondsRealtime(fadeTime + 0.05f);
 
-        // IMPORTANT: hand off to LevelManager (shows 'Completed', then Loading + Entering + loads next)
-        if (LevelManager.I != null)
+        // SAFETY CHECKS (prevents crash)
+        if (transitionCanvas == null)
         {
-            // Clear the black immediately so the Completed/Loading UI is visible above gameplay
-            if (fader) fader.SetClearImmediate();
+            Debug.LogError("❌ No Transition Canvas assigned!");
+            SceneManager.LoadScene(nextLevelName);
+            yield break;
+        }
 
-            LevelManager.I.CompleteLevelAndLoadNext(completedCardSeconds);
-        }
-        else
+        if (transitionText == null)
         {
-            Debug.LogError("[NooseInteract] LevelManager.I is null. Make sure LevelManager exists in MainMenu and persists (DontDestroyOnLoad).");
+            Debug.LogError("❌ No Transition Text assigned!");
+            SceneManager.LoadScene(nextLevelName);
+            yield break;
         }
+
+        if (string.IsNullOrEmpty(nextLevelName))
+        {
+            Debug.LogError("❌ nextLevelName is EMPTY!");
+            yield break;
+        }
+
+        // Show the panel
+        transitionCanvas.SetActive(true);
+        transitionText.text = "Entering Next Level      " + nextLevelName + "...";
+
+        yield return new WaitForSecondsRealtime(panelShowSeconds);
+
+        SceneManager.LoadScene(nextLevelName);
     }
 }
