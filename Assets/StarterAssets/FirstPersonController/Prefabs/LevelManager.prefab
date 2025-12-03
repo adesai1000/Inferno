@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5172064546341721475
+--- !u!1 &7196851506997267923
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4403461457586156903}
-  - component: {fileID: 600777201021731882}
-  - component: {fileID: 3759352449638145037}
+  - component: {fileID: 2408370316681842}
+  - component: {fileID: 604968747435225876}
+  - component: {fileID: 2281404914864240923}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -18,13 +18,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4403461457586156903
+--- !u!4 &2408370316681842
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5172064546341721475}
+  m_GameObject: {fileID: 7196851506997267923}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,30 +33,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &600777201021731882
+--- !u!114 &604968747435225876
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5172064546341721475}
+  m_GameObject: {fileID: 7196851506997267923}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 485a7ea04036cf24a943eac11e064bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelIntroDialogue
-  typewriter: {fileID: 3759352449638145037}
+  typewriter: {fileID: 2281404914864240923}
   dialoguePanel: {fileID: 0}
-  introText: "\u201CWhere am I\u2026? Everything feels numb and heavy, like I\u2019m
-    stuck between choosing to live or disappear. If this is the first circle, then\u2026
-    I guess it\u2019s time to be done, forever.\u201D\n"
---- !u!114 &3759352449638145037
+  introText: "\u201CThis circle hits me the second I enter. There\u2019s no temptation
+    here, just raw fury waiting to tear through anything in its path. The ground
+    shakes with every scream, every strike. If I hesitate for even a moment, the
+    violence here will\_rip\_me\_apart.\u201D"
+--- !u!114 &2281404914864240923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5172064546341721475}
+  m_GameObject: {fileID: 7196851506997267923}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf4e7b915b299c643bc565c7da31820f, type: 3}
