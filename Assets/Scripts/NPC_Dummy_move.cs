@@ -28,6 +28,7 @@ public class SimpleMove : MonoBehaviour
         Cursor.visible = false;
 
         yaw = transform.eulerAngles.y;
+
         if (playerCamera == null && Camera.main != null)
             playerCamera = Camera.main;
     }
@@ -40,6 +41,7 @@ public class SimpleMove : MonoBehaviour
 
     void Update()
     {
+        // Mouse/Gamepad Look
         Vector2 look = Vector2.zero;
 
         if (Mouse.current != null)
@@ -53,9 +55,11 @@ public class SimpleMove : MonoBehaviour
         pitch = Mathf.Clamp(pitch, pitchMin, pitchMax);
 
         transform.rotation = Quaternion.Euler(0f, yaw, 0f);
+
         if (playerCamera != null)
             playerCamera.transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
 
+        // Movement input
         float x = 0f;
         float z = 0f;
 
@@ -72,12 +76,15 @@ public class SimpleMove : MonoBehaviour
                 - (Keyboard.current.downArrowKey.isPressed ? 1f : 0f);
         }
 
-        float currentSpeed = speed;
-        if (Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed)
-            currentSpeed = sprintSpeed;
+        // Sprint
+        float currentSpeed = (Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed)
+            ? sprintSpeed
+            : speed;
 
+        // ✅ FINAL movement calculation (only once)
         Vector3 move = (transform.right * x + transform.forward * z).normalized * currentSpeed;
 
+        // Gravity
         if (controller.isGrounded && verticalVelocity < 0f)
             verticalVelocity = -2f;
 
@@ -86,6 +93,7 @@ public class SimpleMove : MonoBehaviour
 
         controller.Move(move * Time.deltaTime);
 
+        // Escape unlocks cursor
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Cursor.lockState = (Cursor.lockState == CursorLockMode.Locked) ? CursorLockMode.None : CursorLockMode.Locked;

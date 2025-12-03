@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float amount)
     {
         if (amount <= 0f) return;
-        if (_iFrameTimer > 0f) return; // still invulnerable
+        if (_iFrameTimer > 0f) return; 
 
         currentHealth = Mathf.Max(0f, currentHealth - amount);
         _iFrameTimer = iFrameDuration;
