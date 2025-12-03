@@ -85,7 +85,7 @@ public class L5PlayerHealth : MonoBehaviour
         inputs.SetCursorState(false);
 
         // Load next level safely
-        Invoke(nameof(LoadNextLevel), 5f);
+        Invoke(nameof(LoadNextLevel), 3f);
     }
 
     void LoadNextLevel()
