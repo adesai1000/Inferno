@@ -2,6 +2,7 @@ using Cinemachine;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class L5PlayerHealth : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class L5PlayerHealth : MonoBehaviour
     [SerializeField] Transform weaponCamera;
     [SerializeField] Image[] shieldBars;
     [SerializeField] GameObject gameOverContainer;
+
+    // BLACK SCREEN + NEXT LEVEL
+    [SerializeField] GameObject blackScreen;     // Drag your BlackScreen UI here
+    [SerializeField] string nextLevelName;       // Type next scene name here
 
     int currentHealth;
     int gameOverVirtualCameraPriority = 20;
@@ -32,47 +37,59 @@ public class L5PlayerHealth : MonoBehaviour
         }
     }
 
+    // =====================
+    // NORMAL GAME OVER
+    // =====================
     void PlayerGameOver()
     {
         weaponCamera.parent = null;
         deathVirtualCamera.Priority = gameOverVirtualCameraPriority;
+
         gameOverContainer.SetActive(true);
+
         StarterAssetsInputs starterAssetsInputs = FindFirstObjectByType<StarterAssetsInputs>();
         starterAssetsInputs.SetCursorState(false);
-        Destroy(this.gameObject);
+
+        Destroy(gameObject);
     }
 
+    // =====================
+    // ADJUST SHIELD UI
+    // =====================
     void AdjustShieldUI()
     {
         for (int i = 0; i < shieldBars.Length; i++)
         {
-            if (i < currentHealth) 
-            {
-                shieldBars[i].gameObject.SetActive(true);
-            }
-            else 
-            {
-                shieldBars[i].gameObject.SetActive(false);
-            }
+            shieldBars[i].gameObject.SetActive(i < currentHealth);
         }
     }
 
+    // =====================
+    // BOSS KILL → BLACK SCREEN → NEXT LEVEL
+    // =====================
     public void BossKillPlayer()
     {
-        // Same as normal game over but without showing Game Over UI
+        // Camera change
         weaponCamera.parent = null;
         deathVirtualCamera.Priority = gameOverVirtualCameraPriority;
 
-        // Turn off normal game-over screen
+        // Hide regular game over
         gameOverContainer.SetActive(false);
 
-        // Tell GameManager to show YOU WIN — YOU MUST RETURN
-        FindFirstObjectByType<GameManager>().PlayerKilledByBoss();
+        // Enable BLACK SCREEN instantly
+        if (blackScreen != null)
+            blackScreen.SetActive(true);
 
-        // Disable player input and remove player
+        // Disable player input
         StarterAssetsInputs inputs = FindFirstObjectByType<StarterAssetsInputs>();
         inputs.SetCursorState(false);
 
-        Destroy(this.gameObject);
+        // Load next level safely
+        Invoke(nameof(LoadNextLevel), 3f);
+    }
+
+    void LoadNextLevel()
+    {
+        SceneManager.LoadScene(nextLevelName);
     }
 }
