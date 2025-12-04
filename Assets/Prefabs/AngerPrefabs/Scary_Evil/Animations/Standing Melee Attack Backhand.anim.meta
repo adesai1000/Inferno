@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 991bce22050248b44a6a4b485b796957
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 313024
+  packageName: Scary_Evil
+  packageVersion: 1.0.0
+  assetPath: Assets/Scary_Evil/Animations/Standing Melee Attack Backhand.anim
+  uploadId: 738040

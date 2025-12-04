@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5f13d78fb0abed94dabb7b4cd89ed1e3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 313024
+  packageName: Scary_Evil
+  packageVersion: 1.0.0
+  assetPath: Assets/Scary_Evil/Animations/Walking.anim
+  uploadId: 738040

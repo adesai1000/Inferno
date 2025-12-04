@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e7047f6b1f744144eba2224797dacd7d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 313024
+  packageName: Scary_Evil
+  packageVersion: 1.0.0
+  assetPath: Assets/Scary_Evil/Animations/Animator_Controller/Scary_Evil_Idle.controller
+  uploadId: 738040

@@ -12,13 +12,25 @@ public class EnemyContactDamage : MonoBehaviour
         if (timer > 0f) timer -= Time.deltaTime;
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        TryDamage(other);
+    }
+
     void OnTriggerStay(Collider other)
+    {
+        TryDamage(other);
+    }
+
+    void TryDamage(Collider other)
     {
         if (timer > 0f) return;
         if (!other.CompareTag("Player")) return;
 
-        PlayerHealth health = other.GetComponent<PlayerHealth>();
+        
+        PlayerHealth health = other.GetComponentInParent<PlayerHealth>();
         if (health == null) return;
+        Debug.Log("Hit player, applying contact damage");
 
         health.ApplyContactDamage(contactDamage);
         timer = damageCooldown;

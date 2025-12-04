@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8f36461b6f0f9974493764d2f3942b4e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 313024
+  packageName: Scary_Evil
+  packageVersion: 1.0.0
+  assetPath: Assets/Scary_Evil/Animations/Animator_Controller/Scary_Evil_Attack.controller
+  uploadId: 738040
