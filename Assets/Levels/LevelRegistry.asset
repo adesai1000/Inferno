@@ -21,3 +21,7 @@ MonoBehaviour:
     title: Level 3-Greed&Gluttony
   - scene: Anger&Violence
     title: Level 4-Anger&Violence
+  - scene: Treachery
+    title: Level 5-Treachery
+  - scene: Salvation
+    title: Level 6-Salvation
