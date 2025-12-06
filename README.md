@@ -44,7 +44,7 @@ Two sins merged into one chaotic chase sequence.
 - A massive fat demon relentlessly pursues you.  
 - Your tools for survival:
   - Collect healthy food items to maintain stamina and health  
-  - Avoid junk food, which drains your life  
+  - Avoid junk food, which drains your health
   - Outmaneuver and outrun the demon long enough to escape  
 
 A mix of runner gameplay and resource management.
@@ -57,7 +57,7 @@ A combat-focused arena where you must fight your way past hordes of aggressive g
 
 - Defeat enough enemies to unlock the exit and progress.  
 - This level showcases:
-  - The game’s melee and ranged attack systems  
+  - The game’s shooting attack systems  
   - Enemy AI behavior  
 
 ---
@@ -70,11 +70,11 @@ The final confrontation.
   - Of others  
   - Of yourself  
   - Of truth  
-- This boss cannot be beaten. Its victory is inevitable, and its strike shatters the reality of the nightmare.
+- This demon cannot be beaten. Its victory is inevitable, and its strike shatters the reality of the nightmare.
 
 ---
 
-## 🌅 Ending: Awakening
+## 🌅 Ending: Salvation
 
 You return to Limbo, but the bedroom is no longer dark, distorted, and oppressive.
 
