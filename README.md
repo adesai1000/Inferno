@@ -14,6 +14,9 @@ Your journey ends where it began.
 3. Double click the scene named **MainMenu** to load it.
 4. Press the **Play** button at the top of the Unity Editor.
 5. The game will start from the main menu, and you can play through all levels from there.
+
+---
+
 ## 🕳️ Levels & Gameplay
 
 ### Level 1: Limbo
