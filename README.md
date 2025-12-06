@@ -2,10 +2,18 @@
 
 **Inferno** begins with the player in a quiet, ominous bedroom: **Level 1: Limbo**, where something unthinkable happens. This moment becomes the catalyst for a symbolic descent through the layers of sin, each represented as a standalone gameplay challenge.
 
-Your journey ends where it began, but transformed.
+Your journey ends where it began.
 
 ---
+## 🛠️ How to Run the Game
 
+### Run from Unity Editor
+
+1. Open the project in **Unity Hub**.
+2. In the **Project** window, navigate to the **Scenes** folder.
+3. Double click the scene named **MainMenu** to load it.
+4. Press the **Play** button at the top of the Unity Editor.
+5. The game will start from the main menu, and you can play through all levels from there.
 ## 🕳️ Levels & Gameplay
 
 ### Level 1: Limbo
